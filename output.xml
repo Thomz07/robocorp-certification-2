@@ -1,0 +1,1051 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 5.0.1 (Python 3.9.13 on win32)" generated="20230223 17:09:45.058" rpa="true" schemaversion="3">
+<suite id="s1" name="Tasks" source="c:\Users\thoma\Desktop\Boulot Boulot Boulot\Robocorp\certification-2\tasks.robot">
+<test id="s1-t1" name="Order robots from RobotSpareBin Industries Inc" line="16">
+<kw name="Open the robot order website">
+<kw name="Open Available Browser" library="RPA.Browser.Selenium">
+<arg>https://robotsparebinindustries.com/#/robot-order</arg>
+<doc>Attempts to open a browser on the user's device from a set of
+supported browsers. Automatically downloads a corresponding webdriver
+if none is already installed.</doc>
+<msg timestamp="20230223 17:09:49.622" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20230223 17:09:49.636" level="INFO">====== WebDriver manager ======</msg>
+<msg timestamp="20230223 17:09:51.009" level="INFO">Creating an instance of the Chrome WebDriver.</msg>
+<msg timestamp="20230223 17:09:52.868" level="INFO">Created Chrome browser with arguments: --disable-dev-shm-usage --disable-web-security --allow-running-insecure-content --no-sandbox</msg>
+<msg timestamp="20230223 17:09:52.868" level="INFO" html="true">&lt;p&gt;Attempted combinations:&lt;/p&gt;&lt;div class="doc"&gt;&lt;table&gt;&lt;tr&gt;&lt;th&gt;Browser&lt;/th&gt;&lt;th&gt;Download&lt;/th&gt;&lt;th&gt;Error&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;False&lt;/td&gt;&lt;td&gt;Message: 'chromedriver' executable needs to be in PATH. Please see https://chromedriver.chromium.org/home
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Chrome&lt;/td&gt;&lt;td&gt;True&lt;/td&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<msg timestamp="20230223 17:09:52.869" level="INFO">Opening url 'https://robotsparebinindustries.com/#/robot-order'</msg>
+<status status="PASS" starttime="20230223 17:09:49.619" endtime="20230223 17:09:53.397"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:49.616" endtime="20230223 17:09:53.402"/>
+</kw>
+<kw name="Download Excel file">
+<kw name="Download" library="RPA.HTTP">
+<arg>https://robotsparebinindustries.com/orders.csv</arg>
+<arg>overwrite=${True}</arg>
+<doc>An alias for the ``HTTP Get`` keyword.</doc>
+<msg timestamp="20230223 17:09:53.418" level="INFO">Creating a new HTTP session</msg>
+<msg timestamp="20230223 17:09:53.419" level="INFO">Creating Session using : alias=rpasession_alias.httpsrobotsparebinindustries.com, url=https://robotsparebinindustries.com, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=True,                     debug=0 </msg>
+<status status="PASS" starttime="20230223 17:09:53.414" endtime="20230223 17:09:54.002"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:53.409" endtime="20230223 17:09:54.004"/>
+</kw>
+<kw name="Get Orders">
+<kw name="Read table from CSV" library="RPA.Tables">
+<var>${csv_data}</var>
+<arg>orders.csv</arg>
+<arg>header=${True}</arg>
+<doc>Read a CSV file as a table.</doc>
+<msg timestamp="20230223 17:09:54.031" level="INFO">${csv_data} = Table(columns=['Order number', 'Head', 'Body', 'Legs', 'Address'], rows=20)</msg>
+<status status="PASS" starttime="20230223 17:09:54.009" endtime="20230223 17:09:54.031"/>
+</kw>
+<for flavor="IN">
+<var>${data}</var>
+<value>@{csv_data}</value>
+<iter>
+<var name="${data}">{'Order number': '1', 'Head': '1', 'Body': '2', 'Legs': '3', 'Address': 'Address 123'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.041" level="INFO">${id} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.038" endtime="20230223 17:09:54.042"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.045" level="INFO">${head} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.043" endtime="20230223 17:09:54.046"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.048" level="INFO">${body} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.047" endtime="20230223 17:09:54.049"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.052" level="INFO">${legs} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.050" endtime="20230223 17:09:54.052"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.057" level="INFO">${address} = Address 123</msg>
+<status status="PASS" starttime="20230223 17:09:54.054" endtime="20230223 17:09:54.057"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.061" level="INFO">1+1+2+3+Address 123</msg>
+<status status="PASS" starttime="20230223 17:09:54.058" endtime="20230223 17:09:54.061"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.036" endtime="20230223 17:09:54.062"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.035" endtime="20230223 17:09:54.063"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '2', 'Head': '4', 'Body': '1', 'Legs': '5', 'Address': 'Address 456'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.068" level="INFO">${id} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.067" endtime="20230223 17:09:54.077"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.094" level="INFO">${head} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.092" endtime="20230223 17:09:54.095"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.098" level="INFO">${body} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.096" endtime="20230223 17:09:54.098"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.102" level="INFO">${legs} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.099" endtime="20230223 17:09:54.102"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.107" level="INFO">${address} = Address 456</msg>
+<status status="PASS" starttime="20230223 17:09:54.104" endtime="20230223 17:09:54.108"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.111" level="INFO">2+4+1+5+Address 456</msg>
+<status status="PASS" starttime="20230223 17:09:54.109" endtime="20230223 17:09:54.113"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.064" endtime="20230223 17:09:54.114"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.063" endtime="20230223 17:09:54.115"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '3', 'Head': '6', 'Body': '2', 'Legs': '3', 'Address': 'Address 789'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.122" level="INFO">${id} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.119" endtime="20230223 17:09:54.124"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.128" level="INFO">${head} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.125" endtime="20230223 17:09:54.129"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.131" level="INFO">${body} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.129" endtime="20230223 17:09:54.132"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.135" level="INFO">${legs} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.133" endtime="20230223 17:09:54.135"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.140" level="INFO">${address} = Address 789</msg>
+<status status="PASS" starttime="20230223 17:09:54.138" endtime="20230223 17:09:54.140"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.144" level="INFO">3+6+2+3+Address 789</msg>
+<status status="PASS" starttime="20230223 17:09:54.142" endtime="20230223 17:09:54.145"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.116" endtime="20230223 17:09:54.147"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.115" endtime="20230223 17:09:54.147"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '4', 'Head': '2', 'Body': '3', 'Legs': '2', 'Address': 'Address 1'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.153" level="INFO">${id} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.151" endtime="20230223 17:09:54.154"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.157" level="INFO">${head} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.156" endtime="20230223 17:09:54.160"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.163" level="INFO">${body} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.161" endtime="20230223 17:09:54.163"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.167" level="INFO">${legs} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.165" endtime="20230223 17:09:54.168"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.171" level="INFO">${address} = Address 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.168" endtime="20230223 17:09:54.172"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.177" level="INFO">4+2+3+2+Address 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.175" endtime="20230223 17:09:54.178"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.149" endtime="20230223 17:09:54.179"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.148" endtime="20230223 17:09:54.179"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '5', 'Head': '3', 'Body': '5', 'Legs': '1', 'Address': 'Address 2'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.190" level="INFO">${id} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.183" endtime="20230223 17:09:54.191"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.194" level="INFO">${head} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.192" endtime="20230223 17:09:54.195"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.199" level="INFO">${body} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.196" endtime="20230223 17:09:54.199"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.203" level="INFO">${legs} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.201" endtime="20230223 17:09:54.204"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.209" level="INFO">${address} = Address 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.206" endtime="20230223 17:09:54.210"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.212" level="INFO">5+3+5+1+Address 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.210" endtime="20230223 17:09:54.213"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.181" endtime="20230223 17:09:54.214"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.180" endtime="20230223 17:09:54.215"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '6', 'Head': '1', 'Body': '6', 'Legs': '6', 'Address': 'Address 3'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.224" level="INFO">${id} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.222" endtime="20230223 17:09:54.225"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.227" level="INFO">${head} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.225" endtime="20230223 17:09:54.227"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.230" level="INFO">${body} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.229" endtime="20230223 17:09:54.231"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.233" level="INFO">${legs} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.231" endtime="20230223 17:09:54.233"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.236" level="INFO">${address} = Address 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.234" endtime="20230223 17:09:54.237"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.241" level="INFO">6+1+6+6+Address 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.239" endtime="20230223 17:09:54.242"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.217" endtime="20230223 17:09:54.243"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.216" endtime="20230223 17:09:54.244"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '7', 'Head': '5', 'Body': '1', 'Legs': '5', 'Address': 'Address 4'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.249" level="INFO">${id} = 7</msg>
+<status status="PASS" starttime="20230223 17:09:54.248" endtime="20230223 17:09:54.250"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.255" level="INFO">${head} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.251" endtime="20230223 17:09:54.256"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.259" level="INFO">${body} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.257" endtime="20230223 17:09:54.260"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.262" level="INFO">${legs} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.261" endtime="20230223 17:09:54.263"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.266" level="INFO">${address} = Address 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.263" endtime="20230223 17:09:54.267"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.270" level="INFO">7+5+1+5+Address 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.267" endtime="20230223 17:09:54.272"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.246" endtime="20230223 17:09:54.274"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.245" endtime="20230223 17:09:54.275"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '8', 'Head': '2', 'Body': '3', 'Legs': '3', 'Address': 'Address 5'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.281" level="INFO">${id} = 8</msg>
+<status status="PASS" starttime="20230223 17:09:54.279" endtime="20230223 17:09:54.282"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.291" level="INFO">${head} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.289" endtime="20230223 17:09:54.293"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.296" level="INFO">${body} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.294" endtime="20230223 17:09:54.297"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.301" level="INFO">${legs} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.297" endtime="20230223 17:09:54.302"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.306" level="INFO">${address} = Address 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.304" endtime="20230223 17:09:54.306"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.309" level="INFO">8+2+3+3+Address 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.308" endtime="20230223 17:09:54.310"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.278" endtime="20230223 17:09:54.311"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.276" endtime="20230223 17:09:54.311"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '9', 'Head': '3', 'Body': '2', 'Legs': '2', 'Address': 'Address 6'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.318" level="INFO">${id} = 9</msg>
+<status status="PASS" starttime="20230223 17:09:54.315" endtime="20230223 17:09:54.318"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.322" level="INFO">${head} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.319" endtime="20230223 17:09:54.322"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.325" level="INFO">${body} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.323" endtime="20230223 17:09:54.325"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.328" level="INFO">${legs} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.326" endtime="20230223 17:09:54.329"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.333" level="INFO">${address} = Address 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.331" endtime="20230223 17:09:54.333"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.337" level="INFO">9+3+2+2+Address 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.334" endtime="20230223 17:09:54.338"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.313" endtime="20230223 17:09:54.339"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.312" endtime="20230223 17:09:54.340"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '10', 'Head': '4', 'Body': '4', 'Legs': '2', 'Address': 'Address 7'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.345" level="INFO">${id} = 10</msg>
+<status status="PASS" starttime="20230223 17:09:54.344" endtime="20230223 17:09:54.347"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.349" level="INFO">${head} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.348" endtime="20230223 17:09:54.350"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.352" level="INFO">${body} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.351" endtime="20230223 17:09:54.352"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.355" level="INFO">${legs} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.353" endtime="20230223 17:09:54.355"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.357" level="INFO">${address} = Address 7</msg>
+<status status="PASS" starttime="20230223 17:09:54.356" endtime="20230223 17:09:54.359"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.361" level="INFO">10+4+4+2+Address 7</msg>
+<status status="PASS" starttime="20230223 17:09:54.359" endtime="20230223 17:09:54.362"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.341" endtime="20230223 17:09:54.363"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.340" endtime="20230223 17:09:54.364"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '11', 'Head': '6', 'Body': '6', 'Legs': '1', 'Address': 'Address 8'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.371" level="INFO">${id} = 11</msg>
+<status status="PASS" starttime="20230223 17:09:54.367" endtime="20230223 17:09:54.371"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.374" level="INFO">${head} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.372" endtime="20230223 17:09:54.374"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.377" level="INFO">${body} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.375" endtime="20230223 17:09:54.377"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.383" level="INFO">${legs} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.378" endtime="20230223 17:09:54.388"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.395" level="INFO">${address} = Address 8</msg>
+<status status="PASS" starttime="20230223 17:09:54.391" endtime="20230223 17:09:54.396"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.400" level="INFO">11+6+6+1+Address 8</msg>
+<status status="PASS" starttime="20230223 17:09:54.398" endtime="20230223 17:09:54.401"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.365" endtime="20230223 17:09:54.404"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.364" endtime="20230223 17:09:54.405"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '12', 'Head': '1', 'Body': '3', 'Legs': '3', 'Address': 'Address 9'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.413" level="INFO">${id} = 12</msg>
+<status status="PASS" starttime="20230223 17:09:54.411" endtime="20230223 17:09:54.413"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.415" level="INFO">${head} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.414" endtime="20230223 17:09:54.416"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.419" level="INFO">${body} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.417" endtime="20230223 17:09:54.419"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.422" level="INFO">${legs} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.420" endtime="20230223 17:09:54.422"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.426" level="INFO">${address} = Address 9</msg>
+<status status="PASS" starttime="20230223 17:09:54.423" endtime="20230223 17:09:54.427"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.429" level="INFO">12+1+3+3+Address 9</msg>
+<status status="PASS" starttime="20230223 17:09:54.427" endtime="20230223 17:09:54.430"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.409" endtime="20230223 17:09:54.431"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.407" endtime="20230223 17:09:54.431"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '13', 'Head': '1', 'Body': '5', 'Legs': '4', 'Address': 'Address A'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.441" level="INFO">${id} = 13</msg>
+<status status="PASS" starttime="20230223 17:09:54.436" endtime="20230223 17:09:54.442"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.445" level="INFO">${head} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.443" endtime="20230223 17:09:54.446"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.449" level="INFO">${body} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.447" endtime="20230223 17:09:54.449"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.453" level="INFO">${legs} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.450" endtime="20230223 17:09:54.454"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.458" level="INFO">${address} = Address A</msg>
+<status status="PASS" starttime="20230223 17:09:54.455" endtime="20230223 17:09:54.458"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.461" level="INFO">13+1+5+4+Address A</msg>
+<status status="PASS" starttime="20230223 17:09:54.459" endtime="20230223 17:09:54.462"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.433" endtime="20230223 17:09:54.463"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.432" endtime="20230223 17:09:54.463"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '14', 'Head': '3', 'Body': '1', 'Legs': '5', 'Address': 'Address B'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.469" level="INFO">${id} = 14</msg>
+<status status="PASS" starttime="20230223 17:09:54.467" endtime="20230223 17:09:54.470"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.473" level="INFO">${head} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.471" endtime="20230223 17:09:54.473"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.475" level="INFO">${body} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.474" endtime="20230223 17:09:54.475"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.477" level="INFO">${legs} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.476" endtime="20230223 17:09:54.479"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.481" level="INFO">${address} = Address B</msg>
+<status status="PASS" starttime="20230223 17:09:54.479" endtime="20230223 17:09:54.481"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.484" level="INFO">14+3+1+5+Address B</msg>
+<status status="PASS" starttime="20230223 17:09:54.482" endtime="20230223 17:09:54.485"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.465" endtime="20230223 17:09:54.486"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.464" endtime="20230223 17:09:54.487"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '15', 'Head': '3', 'Body': '2', 'Legs': '6', 'Address': 'Address C'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.493" level="INFO">${id} = 15</msg>
+<status status="PASS" starttime="20230223 17:09:54.491" endtime="20230223 17:09:54.494"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.496" level="INFO">${head} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.495" endtime="20230223 17:09:54.497"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.499" level="INFO">${body} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.498" endtime="20230223 17:09:54.500"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.503" level="INFO">${legs} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.501" endtime="20230223 17:09:54.503"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.506" level="INFO">${address} = Address C</msg>
+<status status="PASS" starttime="20230223 17:09:54.504" endtime="20230223 17:09:54.507"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.514" level="INFO">15+3+2+6+Address C</msg>
+<status status="PASS" starttime="20230223 17:09:54.512" endtime="20230223 17:09:54.515"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.489" endtime="20230223 17:09:54.516"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.488" endtime="20230223 17:09:54.517"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '16', 'Head': '6', 'Body': '3', 'Legs': '6', 'Address': 'Address D'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.538" level="INFO">${id} = 16</msg>
+<status status="PASS" starttime="20230223 17:09:54.533" endtime="20230223 17:09:54.538"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.541" level="INFO">${head} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.539" endtime="20230223 17:09:54.542"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.546" level="INFO">${body} = 3</msg>
+<status status="PASS" starttime="20230223 17:09:54.543" endtime="20230223 17:09:54.551"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.558" level="INFO">${legs} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.555" endtime="20230223 17:09:54.559"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.562" level="INFO">${address} = Address D</msg>
+<status status="PASS" starttime="20230223 17:09:54.560" endtime="20230223 17:09:54.563"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.567" level="INFO">16+6+3+6+Address D</msg>
+<status status="PASS" starttime="20230223 17:09:54.564" endtime="20230223 17:09:54.568"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.527" endtime="20230223 17:09:54.569"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.518" endtime="20230223 17:09:54.570"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '17', 'Head': '5', 'Body': '4', 'Legs': '1', 'Address': 'Address E'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.576" level="INFO">${id} = 17</msg>
+<status status="PASS" starttime="20230223 17:09:54.575" endtime="20230223 17:09:54.577"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.579" level="INFO">${head} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.577" endtime="20230223 17:09:54.579"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.581" level="INFO">${body} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.580" endtime="20230223 17:09:54.582"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.584" level="INFO">${legs} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.582" endtime="20230223 17:09:54.584"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.586" level="INFO">${address} = Address E</msg>
+<status status="PASS" starttime="20230223 17:09:54.585" endtime="20230223 17:09:54.586"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.589" level="INFO">17+5+4+1+Address E</msg>
+<status status="PASS" starttime="20230223 17:09:54.587" endtime="20230223 17:09:54.590"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.572" endtime="20230223 17:09:54.591"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.571" endtime="20230223 17:09:54.591"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '18', 'Head': '2', 'Body': '5', 'Legs': '1', 'Address': 'Address F'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.596" level="INFO">${id} = 18</msg>
+<status status="PASS" starttime="20230223 17:09:54.594" endtime="20230223 17:09:54.597"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.599" level="INFO">${head} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.597" endtime="20230223 17:09:54.599"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.601" level="INFO">${body} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.600" endtime="20230223 17:09:54.601"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.604" level="INFO">${legs} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.602" endtime="20230223 17:09:54.605"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.607" level="INFO">${address} = Address F</msg>
+<status status="PASS" starttime="20230223 17:09:54.605" endtime="20230223 17:09:54.607"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.610" level="INFO">18+2+5+1+Address F</msg>
+<status status="PASS" starttime="20230223 17:09:54.608" endtime="20230223 17:09:54.610"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.593" endtime="20230223 17:09:54.613"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.592" endtime="20230223 17:09:54.613"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '19', 'Head': '4', 'Body': '6', 'Legs': '2', 'Address': 'Address G'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.618" level="INFO">${id} = 19</msg>
+<status status="PASS" starttime="20230223 17:09:54.617" endtime="20230223 17:09:54.618"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.620" level="INFO">${head} = 4</msg>
+<status status="PASS" starttime="20230223 17:09:54.619" endtime="20230223 17:09:54.621"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.623" level="INFO">${body} = 6</msg>
+<status status="PASS" starttime="20230223 17:09:54.621" endtime="20230223 17:09:54.623"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.625" level="INFO">${legs} = 2</msg>
+<status status="PASS" starttime="20230223 17:09:54.624" endtime="20230223 17:09:54.625"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.628" level="INFO">${address} = Address G</msg>
+<status status="PASS" starttime="20230223 17:09:54.626" endtime="20230223 17:09:54.629"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.631" level="INFO">19+4+6+2+Address G</msg>
+<status status="PASS" starttime="20230223 17:09:54.629" endtime="20230223 17:09:54.632"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.615" endtime="20230223 17:09:54.633"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.614" endtime="20230223 17:09:54.633"/>
+</iter>
+<iter>
+<var name="${data}">{'Order number': '20', 'Head': '1', 'Body': '1', 'Legs': '5', 'Address': 'Address H'}</var>
+<kw name="Save Excel data in variable">
+<arg>${data}</arg>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${data}[Order number]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.645" level="INFO">${id} = 20</msg>
+<status status="PASS" starttime="20230223 17:09:54.637" endtime="20230223 17:09:54.647"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${head}</var>
+<arg>${data}[Head]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.652" level="INFO">${head} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.649" endtime="20230223 17:09:54.653"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${data}[Body]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.656" level="INFO">${body} = 1</msg>
+<status status="PASS" starttime="20230223 17:09:54.654" endtime="20230223 17:09:54.657"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${legs}</var>
+<arg>${data}[Legs]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.659" level="INFO">${legs} = 5</msg>
+<status status="PASS" starttime="20230223 17:09:54.658" endtime="20230223 17:09:54.660"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${address}</var>
+<arg>${data}[Address]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20230223 17:09:54.662" level="INFO">${address} = Address H</msg>
+<status status="PASS" starttime="20230223 17:09:54.661" endtime="20230223 17:09:54.662"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${id}+${head}+${body}+${legs}+${address}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20230223 17:09:54.665" level="INFO">20+1+1+5+Address H</msg>
+<status status="PASS" starttime="20230223 17:09:54.663" endtime="20230223 17:09:54.666"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.635" endtime="20230223 17:09:54.666"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:54.634" endtime="20230223 17:09:54.667"/>
+</iter>
+<status status="PASS" starttime="20230223 17:09:54.032" endtime="20230223 17:09:54.668"/>
+</for>
+<status status="PASS" starttime="20230223 17:09:54.007" endtime="20230223 17:09:54.668"/>
+</kw>
+<status status="PASS" starttime="20230223 17:09:49.611" endtime="20230223 17:09:54.670"/>
+</test>
+<doc>Orders robots from RobotSpareBin Industries Inc.
+Saves the order HTML receipt as a PDF file.
+Saves the screenshot of the ordered robot.
+Embeds the screenshot of the robot to the PDF receipt.
+Creates ZIP archive of the receipts and the images.
+</doc>
+<status status="PASS" starttime="20230223 17:09:45.081" endtime="20230223 17:09:54.674"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tasks</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Tasks">Tasks</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
